@@ -1,0 +1,48 @@
+html{
+  margin: 0;
+  padding: 0;
+  height:100%;
+  width: 100%;
+}
+body{
+  margin: 0;
+  padding: 0;
+  height:100%;
+  width: 100%;
+}
+#draw_wrapper{
+  display: flex;
+  height: 100%;
+  width: 100%;
+}
+#team_wrapper{
+    width: 100px;
+    display:flex;
+    flex-direction:column;
+    justify-content: space-around;
+}
+.team{
+  width:60px;
+  height: 90px;
+  line-height: 90px;
+  text-align: center;
+  align-items: center;
+  font-size: 36pt;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+.team.selected{
+  width: 90px;
+}
+#team_wrapper > #red_team{
+  background-color: #ff0000;
+}
+#team_wrapper > #yellow_team{
+  background-color: #fff000;
+}
+#team_wrapper > #green_team{
+  background-color: #32CD32;
+}
+#team_wrapper > #blue_team{
+  background-color: #0f0fff;
+}
