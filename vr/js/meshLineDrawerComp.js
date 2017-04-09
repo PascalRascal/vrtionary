@@ -77,11 +77,12 @@ AFRAME.registerComponent('testing', {
 
   },
 
-  createMeshLine: function (strokeData, color, lineWidth, shapeId) {
+  createMeshLine: function (strokeData, color, lineWidth, shapeId, teamNumber) {
     var options = {};
     options.color = color;
     options.lineWidth = lineWidth;
     options.shapeId = shapeId;
+    options.teamNumber = teamNumber;
     this.uninitiatedDrawingLines.push(new DrawingLine(strokeData, this.el, options));
   },
   removeMeshLine: function(shapeId){
@@ -148,6 +149,9 @@ AFRAME.registerComponent('testing', {
 
 function DrawingLine(drawingData, object3D, options) {
   this.options = options;
+  if(options.teamNumber == 4){
+    console.log("ok it got this far");
+  }
   this.resolution = new THREE.Vector2(window.innerWidth, window.innerHeight);
   var randomAngle = Math.random() * 2 * Math.PI;
   this.linePosition = new THREE.Vector3(Math.cos(randomAngle) * 20, 5 - Math.random() * 10, Math.sin(randomAngle) * 20);
@@ -219,7 +223,9 @@ DrawingLine.prototype.initiateLine = function () {
     //near: 0.1,
     //far: 1000
   });
-
+  if(this.options.teamNumber == 4){
+    console.log("getting closer /...");
+  }
   var geometry = new THREE.Geometry();
 
   for (var i = 0; i < this.drawingData.length; i++) {

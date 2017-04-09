@@ -36,11 +36,5 @@ scene.addEventListener('loaded', function(){
     document.getElementById("fullscreenLads").addEventListener('click', function(){
       enterVR.requestEnterFullscreen();
     })
-    theDrawingId = findGetParameter('did');
-    if(!theDrawingId){
-        theDrawingId = randId();
-    }else{
-
-    }
 })
 

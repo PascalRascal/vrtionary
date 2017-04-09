@@ -47,7 +47,7 @@ function VRtionary(options) {
         _this.draw3DShape(e, 3);
     })
     this.team4shapes = this.room.child('team' + 4).child('shapes');
-    this.team1shapes.on('child_added', function(e){
+    this.team4shapes.on('child_added', function(e){7
         _this.draw3DShape(e, 4);
     })
   }
@@ -211,8 +211,9 @@ VRtionary.prototype.draw3DShape = function(s, teamNumber) {
      */
   var maxHeight = 480;
   var maxWidth = 720;
+
   var points = generate3DPoints(shape.linePoints2D, maxWidth, maxHeight, teamNumber);
-  this.mlMaker.createMeshLine(points, shape.color, shape.strokeWidth, shapeId);
+  this.mlMaker.createMeshLine(points, shape.color, shape.strokeWidth, shapeId, teamNumber);
 };
 VRtionary.prototype.undraw3DShape = function(s) {
   var shape = s.val();
@@ -265,7 +266,7 @@ var generate3DPoints = function(points, maxWidth, maxHeight, tn) {
     for (var i = 0; i <= 1; i += 1 / (points.length * 4)) {
       bsplinePoints.push(spline.calcAt(i));
     }
-    console.log(tn);
+
     for (var i = 0; i < bsplinePoints.length; i++) {
       points3D[i] = [];
       points3D[i][0] = Math.cos(2 * Math.PI * (((tn-1) * maxWidth) + bsplinePoints[i][0]) / width) *
@@ -273,10 +274,7 @@ var generate3DPoints = function(points, maxWidth, maxHeight, tn) {
       points3D[i][1] = maxHeight / 2 - bsplinePoints[i][1];
       points3D[i][2] = Math.sin(2 * Math.PI * (((tn-1) * maxWidth) + bsplinePoints[i][0]) / width) *
         radius;
-      console.log(maxHeight / 2 - bsplinePoints[i][1]);
     }
-    console.log(((tn - 1) * maxWidth));
-    
 
     return points3D;
   } else {

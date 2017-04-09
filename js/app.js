@@ -10,7 +10,6 @@ function generateGameName() {
     return gameName;
 }
 var yo = new VRtionary({});
-yo.createRoom('fug', 5);
 //Hide the modal
 $('#gameDetailsModal').hide();
 $('#createGameButton').click(()=>{
