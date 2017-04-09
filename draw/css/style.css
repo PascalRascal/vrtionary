@@ -106,3 +106,6 @@ body{
     width: 100px;
     font-size: 40pt;
 }
+#overlay{
+    z-index: 10;
+}

@@ -95,6 +95,8 @@ $(function () {
     resizeCanvas();
     resetTimer();
     $('#word_hint').html(newWord);
+    $('#overlay').hide();
+    $('#overlay').modal();
 });
 
 $(window).resize(function () {
