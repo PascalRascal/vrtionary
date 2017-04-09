@@ -146,9 +146,7 @@ AFRAME.registerComponent('testing', {
 
 function DrawingLine(drawingData, object3D, options) {
   this.options = options;
-  if(options.teamNumber == 4){
-    console.log("ok it got this far");
-  }
+
   this.resolution = new THREE.Vector2(window.innerWidth, window.innerHeight);
   var randomAngle = Math.random() * 2 * Math.PI;
   this.linePosition = new THREE.Vector3(Math.cos(randomAngle) * 20, 5 - Math.random() * 10, Math.sin(randomAngle) * 20);
