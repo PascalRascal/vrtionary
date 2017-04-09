@@ -1,7 +1,8 @@
 var lc,
     canvasWidth = 720,
     canvasHeight = 480,
-    timer = 30;
+    timer = 30, 
+    x;
 
 //Zoom the canvas so the entire canvas is always visible
 function resizeCanvas() {
@@ -27,9 +28,10 @@ function resizeCanvas() {
 
 //(re)start countdown timer
 function resetTimer() {
+    clearInterval(x);
     timer = 30;
     $("#count_down").html(timer);
-    var x = setInterval(function () {
+    x = setInterval(function () {
         timer = timer - 1;
         $("#count_down").html(timer);
         if (timer <= 5) {
@@ -43,11 +45,11 @@ function resetTimer() {
 function finalCountdown() {
     timer = 50;
     $("#count_down").html(timer / 10);
-    var y = setInterval(function () {
+    x = setInterval(function () {
         timer = timer - 1;
         $("#count_down").html((timer / 10).toFixed(1));
         if (timer <= 0) {
-            clearInterval(y);
+            clearInterval(x);
         }
     }, 100);
 }
