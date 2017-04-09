@@ -38,17 +38,29 @@ function VRtionary(options) {
     this.team1shapes.on('child_added', function(e){
         _this.draw3DShape(e, 1);
     })
+    this.team1shapes.on('child_removed', function(e){
+        _this.remove(e.val().shapeId);
+    })
     this.team2shapes = this.room.child('team' + 2).child('shapes');
     this.team2shapes.on('child_added', function(e){
         _this.draw3DShape(e, 2);
+    })
+    this.team2shapes.on('child_removed', function(e){
+        _this.remove(e.val().shapeId);
     })
     this.team3shapes = this.room.child('team' + 3).child('shapes');
     this.team3shapes.on('child_added', function(e){
         _this.draw3DShape(e, 3);
     })
+    this.team3shapes.on('child_removed', function(e){
+        _this.remove(e.val().shapeId);
+    })
     this.team4shapes = this.room.child('team' + 4).child('shapes');
     this.team4shapes.on('child_added', function(e){7
         _this.draw3DShape(e, 4);
+    })
+    this.team4shapes.on('child_removed', function(e){
+        _this.remove(e.val().shapeId);
     })
   }
   if (options.lCanvas) {
@@ -218,6 +230,10 @@ VRtionary.prototype.draw3DShape = function(s, teamNumber) {
 VRtionary.prototype.undraw3DShape = function(s) {
   var shape = s.val();
 };
+
+VRtionary.prototype.remove = function (id){
+    this.mlMaker.el.removeObject3D(id);
+}
 /**
  Thanks for
 http://stackoverflow.com/questions/5448545/how-to-retrieve-get-parameters-from-javascript

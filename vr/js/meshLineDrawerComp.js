@@ -177,6 +177,8 @@ function DrawingLine(drawingData, object3D, options) {
   this.xShift = 10;
   this.yShift = 150;
   this.sphereDone = false;
+  this.heartTimeTrack = 0;
+  this.heartDone = false;
 
   this.shapeId = options.shapeId;
 
@@ -330,11 +332,73 @@ DrawingLine.prototype.traceSphere = function (time, radius, timeToComplete, spir
   this.line.advance(this.linePosition);
 
 }
+
+DrawingLine.prototype.traceHeart= function(time, timeToComplete){
+  this.heartTimeTrack += time / 1000;
+  var t = this.heartTimeTrack;
+  if(this.heartTimeTrack >= Math.PI * 2){
+    this.heartDone = true;
+  }
+  if(!this.heartDone){
+    var newX = 16 * Math.pow(Math.sin(t), 3);
+    var newY = 13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t);
+    this.linePosition.set(newX, newY, this.linePosition.z);
+    this.line.advance(this.linePosition);
+  }
+}
+
+DrawingLine.prototype.moveToPostion = function (x,y,z, time) {
+  var timeToComplete = time;
+  var easings = [
+    TWEEN.Easing.Quartic.In,
+    TWEEN.Easing.Quartic.InOut,
+    TWEEN.Easing.Quintic.In,
+    TWEEN.Easing.Circular.In,
+    TWEEN.Easing.Circular.Out,
+    TWEEN.Easing.Circular.InOut,
+    TWEEN.Easing.Quadratic.In,
+    TWEEN.Easing.Quadratic.Out
+  ]
+  var easingX = easings[Math.floor(Math.random() * easings.length)]
+  var easingY = easings[Math.floor(Math.random() * easings.length)]
+  var easingZ = easings[Math.floor(Math.random() * easings.length)]
+
+  this.linePosition.isDoneX = false;
+  this.linePosition.isDoneY = false;
+  this.linePosition.isDoneZ = false;
+
+  var newX = x;
+  var newY = y;
+  var newZ = z;
+  this.tweenX
+    .to({ x: newX }, timeToComplete)
+    .easing(easingX)
+    .onComplete(function () {
+      this.isDoneX = true;
+    });
+  this.tweenY
+    .to({ y: newY }, timeToComplete)
+    .easing(easingY)
+    .onComplete(function () {
+      this.isDoneY = true;
+    });
+  this.tweenZ
+    .to({ z: newZ }, timeToComplete)
+    .easing(easingZ)
+    .onComplete(function () {
+      this.isDoneZ = true;
+    });
+  this.tweenX.start();
+  this.tweenY.start();
+  this.tweenZ.start();
+  this.wandering = true;
+
+}
 /**
  * Move the head of the line to the first position of its shape
  */
 DrawingLine.prototype.firstShapePosition = function () {
-  var timeToComplete = 10000 + Math.floor(Math.random() * 10000);
+  var timeToComplete = 3000 + Math.floor(Math.random() * 3000);
   var easings = [
     TWEEN.Easing.Quartic.In,
     TWEEN.Easing.Quartic.InOut,
