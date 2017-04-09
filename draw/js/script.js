@@ -13,7 +13,20 @@ var lc,
          'javascript', 'c#', 'java', 'jar', 'php', 'smile', 'cheek', 'jail', 'cop', 'ear', 'drum', 'guitar',
          'microphone', 'milk', 'cow', 'turtle', 'giant', 'wings', 'burger', 'spider', 'daddy long legs', 'baby', 'monkey',
          'ape', 'arm', 'shoe' ];
-
+//assign modal defaults
+$.modal.defaults = {
+  closeExisting: true,    // Close existing modals. Set this to false if you need to stack multiple modal instances.
+  escapeClose: false,      // Allows the user to close the modal by pressing `ESC`
+  clickClose: false,       // Allows the user to close the modal by clicking the overlay
+  closeText: 'Close',     // Text content for the close <a> tag.
+  closeClass: '',         // Add additional class(es) to the close <a> tag.
+  showClose: false,        // Shows a (X) icon/link in the top-right corner
+  modalClass: "modal",    // CSS class added to the element being displayed in the modal.
+  spinnerHtml: null,      // HTML appended to the default spinner during AJAX requests.
+  showSpinner: true,      // Enable/disable the default spinner during AJAX requests.
+  fadeDuration: null,     // Number of milliseconds the fade transition takes (null means no transition)
+  fadeDelay: 1.0          // Point during the overlay's fade-in that the modal begins to fade in (.5 = 50%, 1.5 = 150%, etc.)
+};
 //Zoom the canvas so the entire canvas is always visible
 function resizeCanvas() {
     var heightRatio = ($(window).height() - 20) / canvasHeight,
@@ -93,40 +106,25 @@ $(function () {
     vrtionary = new VRtionary({lCanvas: lc});
     vrtionary.setClockElement();
     resizeCanvas();
-    resetTimer();
-    $('#word_hint').html(newWord);
     $('#overlay').hide();
     $('#overlay').modal();
+    $.modal
 });
 
 $(window).resize(function () {
     resizeCanvas();
 });
 
-$(".team").click(function () {
-    if (!$(this).attr("class").includes("selected")) {
-        $(".team.selected").removeClass("selected");
-        $(this).addClass("selected");
-        lc.clear();
-        switch ($(this).attr("class").split(/\s+/)[1]) {
-        case "red":
-            vrtionary.setTeam(1);
-            lc.setColor("primary", "#ff0000");
-            break;
-        case "blue":
-            vrtionary.setTeam(2);
-            lc.setColor("primary", "#0f0fff");
-            break;
-        case "green":
-            vrtionary.setTeam(3);
-            lc.setColor("primary", "#32CD32");
-            break;
-        case "yellow":
-            vrtionary.setTeam(4);
-            lc.setColor("primary", "#fff000");
-            break;
-        }
-    }
+$(".team_button").click(function () {
+    var team = $(".team_button").index(this) + 1;
+    
+    vrtionary.setTeam(team);
+    
+    $(".team:nth-child(" + team + ")").addClass("selected");
+    lc.setColor("primary", $(this).css("background-color"));
+    $.modal.close();
+    
+    newWord();
 });
 
 $('#skip').click(function () {

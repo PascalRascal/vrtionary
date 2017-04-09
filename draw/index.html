@@ -10,6 +10,7 @@
 	<link href="../css/literallycanvas.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="../fonts/Font-Awesome/css/font-awesome.min.css">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
+    <script src="../js/jquery-3.1.1.js"></script>
     <script src="../js/jquery.modal.min.js"></script>
     <link rel="stylesheet" type="text/css" href="../css/jquery.modal.css">
     <script src="https://www.gstatic.com/firebasejs/3.6.2/firebase.js"></script>
@@ -27,12 +28,11 @@
         };
         firebase.initializeApp(config);
     </script>
-	<script src="../js/jquery-3.1.1.js"></script>
 	<script src="../js/literallycanvas-core.min.js"></script>
 </head>
 <body>
     <div id='team_wrapper'>
-        <div class='team red selected'>0</div>
+        <div class='team red'>0</div>
         <div class='team blue'>0</div>
         <div class='team green'>0</div>
         <div class='team yellow'>0</div>
@@ -40,20 +40,22 @@
     
     <div id='right_wrapper'>
         <div class='action yellow' id='skip'><i class="fa fa-arrow-right" aria-hidden="true"></i></div>
-        <div class='action red' id='count_down'>23</div>
+        <div class='action red' id='count_down'>30</div>
         <div class='action green' id='next'><i class="fa fa-check" aria-hidden="true"></i></div>
     </div>
     
-    <div id='word_hint'>word</div>
+    <div id='word_hint'></div>
+    
     <div class="canvas core"></div>
+    
     <div id="overlay" class="modal">
+        Select a team!
         <div id="team_selector">
-            <div id="1" class="team_button red"></div>
-            <div id="2" class="team_button blue"></div>
-            <div id="3" class="team_button green"></div>
-            <div id="4" class="team_button yellow"></div>
+            <div class="team_button red"></div>
+            <div class="team_button blue"></div>
+            <div class="team_button green"></div>
+            <div class="team_button yellow"></div>
         </div>
-        
     </div>
     <script src="./js/script.js"></script>
 </body>
