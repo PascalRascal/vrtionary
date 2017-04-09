@@ -1,4 +1,4 @@
-function MSPaintVR(options) {
+function VRtionary(options) {
     this.uid;
     this.auth = firebase.auth();
     this.db = firebase.database();
@@ -40,17 +40,17 @@ function MSPaintVR(options) {
     }
 }
 
-MSPaintVR.prototype.showViewLink = function(){
+VRtionary.prototype.showViewLink = function(){
     this.viewLink.setAttribute('href', 'https://pascalrascal.github.io/ptw/view/?did=' + this.drawingId);
     this.viewLink.innerHTML = 'https://pascalrascal.github.io/ptw/view/?did=' + this.drawingId;
 
 }
-MSPaintVR.prototype.showEditLink = function(){
+VRtionary.prototype.showEditLink = function(){
     //TODO: Replace with acutal URL
     this.editLink.setAttribute('href', 'https://pascalrascal.github.io/ptw/?did=' + this.drawingId);
     this.editLink.innerHTML = 'https://pascalrascal.github.io/ptw/?did=' + this.drawingId;
 }
-MSPaintVR.prototype.init = function () {
+VRtionary.prototype.init = function () {
     //Initiate Authentication and Database
     this.auth = firebase.auth();
     this.db = firebase.database().ref();
@@ -72,7 +72,7 @@ MSPaintVR.prototype.init = function () {
     **/
 
 }
-MSPaintVR.prototype.setUID = function(user){
+VRtionary.prototype.setUID = function(user){
     if(user){
         this.uid = user.uid
         this.setDrawing(this.drawingId);
@@ -80,7 +80,7 @@ MSPaintVR.prototype.setUID = function(user){
         this.uid = null;
     }
 }
-MSPaintVR.prototype.setDrawing = function(drawingId) {
+VRtionary.prototype.setDrawing = function(drawingId) {
     if(!drawingId){
         this.drawingId = randId();
         localStorage.setItem('did', this.did);
@@ -122,19 +122,19 @@ MSPaintVR.prototype.setDrawing = function(drawingId) {
         this.shapes2D.on('child_removed', this.undraw3DShape.bind(this));
     }
 }
-MSPaintVR.prototype.login = function () {
+VRtionary.prototype.login = function () {
     this.auth.signInAnonymously().catch(function (error) {
-        console.log(reason);
+        console.log(error);
     });
 }
 /**
  * 
  * 2D Shape Functions
  **/
-MSPaintVR.prototype.push2DShape = function (shape) {
+VRtionary.prototype.push2DShape = function (shape) {
     return this.shapes2D.push(shape);
 }
-MSPaintVR.prototype.draw2DShape = function (s) {
+VRtionary.prototype.draw2DShape = function (s) {
     var shape = s.val();
     var lc = this.lCanvas;
     //If no drawing exists 
@@ -171,7 +171,7 @@ MSPaintVR.prototype.draw2DShape = function (s) {
 
 }
 
-MSPaintVR.prototype.undraw2DShape = function (s) {
+VRtionary.prototype.undraw2DShape = function (s) {
     var shape = s.val();
     console.log(shape);
 }
@@ -179,7 +179,7 @@ MSPaintVR.prototype.undraw2DShape = function (s) {
 /**
  * VR Environment Functions
  * */
-MSPaintVR.prototype.draw3DShape = function (s) {
+VRtionary.prototype.draw3DShape = function (s) {
     var shape = s.val();
     /**
      * Todo: Make height+width not bound in stone
@@ -189,7 +189,7 @@ MSPaintVR.prototype.draw3DShape = function (s) {
     var points = generate3DPoints(shape.linePoints2D, maxWidth, maxHeight);
     this.mlMaker.createMeshLine(points, shape.color, shape.strokeWidth);
 }
-MSPaintVR.prototype.undraw3DShape = function (s) {
+VRtionary.prototype.undraw3DShape = function (s) {
     var shape = s.val();
 }
 /**

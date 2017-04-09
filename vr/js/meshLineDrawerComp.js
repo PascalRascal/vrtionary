@@ -54,7 +54,7 @@ AFRAME.registerComponent('testing', {
     this.sphereTimeTrack = -1;
     this.sphereDirection = 1;
     this.state = 'waiting';
-    this.msPaintVR;
+    this.vrtionary;
     this.uninitiatedDrawingLines = [];
     this.drawingLines = [];
 
@@ -69,9 +69,9 @@ AFRAME.registerComponent('testing', {
       meshLineMaker: this,
       editLink: edit
     }
-    this.msPaintVR = new MSPaintVR(options)
-    this.msPaintVR.init();
-    this.msPaintVR.login();
+    this.vrtionary = new VRtionary(options)
+    this.vrtionary.init();
+    this.vrtionary.login();
 
 
 
