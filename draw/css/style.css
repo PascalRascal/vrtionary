@@ -18,7 +18,7 @@ body{
   z-index: 1;
   background-color: #fff;
   height: 100%;
-  width: 80px;
+  width: 0px;
   display:flex;
   flex-direction:column;
   justify-content: space-around;
@@ -53,4 +53,7 @@ body{
 }
 #play_area {
   width:500px;
+}
+.canvas{
+    min-height:100%;
 }
