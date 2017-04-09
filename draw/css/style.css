@@ -117,7 +117,24 @@ body{
     display: flex;
     justify-content: space-around;
 }
-
+#clear_wrapper{
+    display: flex;
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    justify-content: center;
+    height: 0;
+    top: 80%;
+}
+#clear_drawing{
+    display: flex;
+    justify-content: center;
+    padding: .2em .5em;
+    font-size: 20pt;
+    border-radius: 10px;
+    height: 1.5em;
+    line-height: 1.5em;
+}
 .red{
   background-color: #ff0000;
 }

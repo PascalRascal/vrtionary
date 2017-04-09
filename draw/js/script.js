@@ -141,3 +141,7 @@ $('#next').click(function () {
         givePoint();
     }
 });
+
+$('#clear_drawing').click(function () {
+    vrtionary.ultimateClear();
+});
