@@ -3,8 +3,8 @@ var lc,
     canvasHeight = 480,
     vrtionary,
     timer = 30, 
-    x;
-var words = ['cat', 'rhino', 'hand', 'house', 'window', 'computer', 'man', 'woman', 'love', 'hate', 'envy',
+    x,
+    words = ['cat', 'rhino', 'hand', 'house', 'window', 'computer', 'man', 'woman', 'love', 'hate', 'envy',
          'greed', 'sloth', 'water', 'rain', 'storm', 'tornado', 'hurricane', 'planet', 'jupiter', 'candy',
          'phone', 'laptop', 'chips', 'soda', 'poptart', 'sleep', 'ohio', 'school', 'pencil', 'pen', 'foot',
          'nose', 'Middle East', 'bacteria', 'door', 'television', 'money', 'chair', 'jump', 'elephant',
@@ -42,14 +42,16 @@ function givePoint() {
     vrtionary.setTeamScore(parseInt($('.team.selected').html(), 10));
 }
 
-//Returns a random word
+//Assigns a new word to the team and resets the timer and canvas
 function newWord() {
-    return words[Math.floor((Math.random() * words.length))];
+    $('#word_hint').html(words[Math.floor((Math.random() * words.length))]);
+    resetTimer();
+    vrtionary.ultimateClear();
+    vrtionary.setTeamTime(30);
 }
 
 //(re)start countdown timer
 function resetTimer() {
-    vrtionary.ultimateClear();
     clearInterval(x);
     timer = 30;
     $("#count_down").html(timer);
@@ -71,9 +73,10 @@ function finalCountdown() {
     x = setInterval(function () {
         timer = timer - 1;
         $("#count_down").html((timer / 10).toFixed(1));
-        vrtionary.setTeamTime((timer/10).toFixed(1));
+        vrtionary.setTeamTime((timer / 10).toFixed(1));
         if (timer <= 0) {
             clearInterval(x);
+            newWord();
         }
     }, 100);
 }
@@ -126,17 +129,13 @@ $(".team").click(function () {
 
 $('#skip').click(function () {
     if (timer > 0) {
-        $('#word_hint').html(newWord);
-        lc.clear();
-        resetTimer();
+        newWord();
     }
 });
 
 $('#next').click(function () {
     if (timer > 0) {
-        $('#word_hint').html(newWord);
-        lc.clear();
-        resetTimer();
+        newWord();
         givePoint();
     }
 });
