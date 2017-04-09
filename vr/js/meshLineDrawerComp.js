@@ -398,7 +398,7 @@ DrawingLine.prototype.moveToPostion = function (x,y,z, time) {
  * Move the head of the line to the first position of its shape
  */
 DrawingLine.prototype.firstShapePosition = function () {
-  var timeToComplete = 3000 + Math.floor(Math.random() * 3000);
+  var timeToComplete = 2000 + Math.floor(Math.random() * 2000);
   var easings = [
     TWEEN.Easing.Quartic.In,
     TWEEN.Easing.Quartic.InOut,

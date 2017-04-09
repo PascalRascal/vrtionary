@@ -16,3 +16,10 @@ $('#createGameButton').click(()=>{
     $('#gameDetailsModal').modal();
 })
 
+$('#joinInVR').click(()=>{
+    
+})
+
+$('#joinAsPainter').click(()=>{
+
+})

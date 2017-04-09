@@ -147,6 +147,12 @@ VRtionary.prototype.setTeamTime = function(newTime){
     })
 }
 
+VRtionary.prototype.setClockElement = function(clock){
+    this.room.child('team' + this.team).child('time').on('child_changed', function(s){
+        console.log(s.val());
+    })
+}
+
 
 VRtionary.setTeamScore = function(newScore){
     this.room.child('team' + this.team).update({
@@ -174,9 +180,7 @@ VRtionary.prototype.init = function() {
 
   //Declare All the Cool Events
   this.auth.onAuthStateChanged(this.setUID.bind(this));
-  /**
-    We can use the .bind on a function to keep the context the same! amAZXING
-    **/
+
 };
 
 VRtionary.prototype.createRoom = function(roomname, teamcount) {
