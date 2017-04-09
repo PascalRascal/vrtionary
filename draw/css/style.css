@@ -4,6 +4,7 @@ html{
   height:100%;
   width: 100%;
 }
+
 body{
   margin: 0;
   padding: 0;
@@ -23,6 +24,7 @@ body{
   flex-direction:column;
   justify-content: space-around;
 }
+
 .team{
   width:50px;
   height: 75px;
@@ -39,21 +41,19 @@ body{
 .team.selected{
   width: 80px;
 }
-#team_wrapper > #red_team{
+.red{
   background-color: #ff0000;
 }
-#team_wrapper > #yellow_team{
+.yellow{
   background-color: #fff000;
 }
-#team_wrapper > #green_team{
+.green{
   background-color: #32CD32;
 }
-#team_wrapper > #blue_team{
+.blue{
   background-color: #0f0fff;
 }
-#play_area {
-  width:500px;
-}
+
 .canvas{
     min-height:100%;
 }
