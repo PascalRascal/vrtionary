@@ -1,11 +1,12 @@
 var lc,
     canvasWidth = 720,
-    canvasHeight = 480;
+    canvasHeight = 480,
+    timer = 30;
 
 //Zoom the canvas so the entire canvas is always visible
 function resizeCanvas() {
-    var heightRatio = ($(window).height() -20) / canvasHeight,
-        widthRatio = ($(window).width() -20) / canvasWidth;
+    var heightRatio = ($(window).height() - 20) / canvasHeight,
+        widthRatio = ($(window).width() - 20) / canvasWidth;
     
     if (canvasHeight > $(window).height() || canvasWidth > $(window).width()) {
         //window is too small
@@ -24,6 +25,34 @@ function resizeCanvas() {
     }
 }
 
+//(re)start countdown timer
+function resetTimer() {
+    timer = 30;
+    $("#count_down").html(timer);
+    var x = setInterval(function () {
+        timer = timer - 1;
+        $("#count_down").html(timer);
+        if (timer <= 5) {
+            clearInterval(x);
+            finalCountdown();
+        }
+    }, 1000);
+}
+
+//Up the refresh-rate of the timer for the last few seconds
+function finalCountdown() {
+    timer = 50;
+    $("#count_down").html(timer / 10);
+    var y = setInterval(function () {
+        timer = timer - 1;
+        $("#count_down").html((timer / 10).toFixed(1));
+        if (timer <= 0) {
+            clearInterval(y);
+        }
+    }, 100);
+}
+
+//on document.ready
 $(function () {
     //Initialize canvas component
     lc = LC.init(document.getElementsByClassName('canvas core')[0], {
@@ -34,6 +63,7 @@ $(function () {
     });
     
     resizeCanvas();
+    resetTimer();
 });
 
 $(window).resize(function () {
@@ -47,4 +77,17 @@ $(".team").click(function () {
         lc.clear();
         lc.setColor("primary", $(this).css("background-color"));
     }
+});
+
+$('#skip').click(function () {
+    //new word
+    lc.clear();
+    resetTimer();
+});
+
+$('#next').click(function () {
+    //new word
+    lc.clear();
+    resetTimer();
+    //add point
 });
