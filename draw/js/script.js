@@ -4,16 +4,16 @@ var lc,
     vrtionary,
     timer = 30, 
     x;
-var words =
-['cat', 'rhino', 'hand', 'house', 'window', 'computer', 'man', 'woman', 'love', 'hate', 'envy',
- 'greed', 'sloth', 'water', 'rain', 'storm', 'tornado', 'hurricane', 'planet', 'jupiter', 'candy',
- 'phone', 'laptop', 'chips', 'soda', 'poptart', 'sleep', 'ohio', 'school', 'pencil', 'pen', 'foot',
- 'nose', 'Middle East', 'bacteria', 'door', 'television', 'money', 'chair', 'jump', 'elephant',
- 'scissors', 'point', 'glue', 'star', 'tree', 'airplane', 'bird', 'superhero', 'superman', 'tail', 'basketball',
- 'baseball', 'football', 'soccer', 'cricket', 'japan', 'mouth', 'tooth', 'glasses', 'hat',
- 'javascript', 'c#', 'java', 'jar', 'php', 'smile', 'cheek', 'jail', 'cop', 'ear', 'drum', 'guitar',
- 'microphone', 'milk', 'cow', 'turtle', 'giant', 'wings', 'burger', 'spider', 'daddy long legs', 'baby', 'monkey',
- 'ape', 'arm', 'shoe' ]
+var words = ['cat', 'rhino', 'hand', 'house', 'window', 'computer', 'man', 'woman', 'love', 'hate', 'envy',
+         'greed', 'sloth', 'water', 'rain', 'storm', 'tornado', 'hurricane', 'planet', 'jupiter', 'candy',
+         'phone', 'laptop', 'chips', 'soda', 'poptart', 'sleep', 'ohio', 'school', 'pencil', 'pen', 'foot',
+         'nose', 'Middle East', 'bacteria', 'door', 'television', 'money', 'chair', 'jump', 'elephant',
+         'scissors', 'point', 'glue', 'star', 'tree', 'airplane', 'bird', 'superhero', 'superman', 'tail', 'basketball',
+         'baseball', 'football', 'soccer', 'cricket', 'japan', 'mouth', 'tooth', 'glasses', 'hat',
+         'javascript', 'c#', 'java', 'jar', 'php', 'smile', 'cheek', 'jail', 'cop', 'ear', 'drum', 'guitar',
+         'microphone', 'milk', 'cow', 'turtle', 'giant', 'wings', 'burger', 'spider', 'daddy long legs', 'baby', 'monkey',
+         'ape', 'arm', 'shoe' ];
+
 //Zoom the canvas so the entire canvas is always visible
 function resizeCanvas() {
     var heightRatio = ($(window).height() - 20) / canvasHeight,
@@ -38,7 +38,12 @@ function resizeCanvas() {
 
 //adds one to selected team's score
 function givePoint() {
-    $('.team.selected').html(parseInt($('.team.selected').html()) + 1);
+    $('.team.selected').html(parseInt($('.team.selected').html(), 10) + 1);
+}
+
+//Returns a random word
+function newWord() {
+    return words[Math.floor((Math.random() * words.length))];
 }
 
 //(re)start countdown timer
@@ -82,6 +87,7 @@ $(function () {
     
     resizeCanvas();
     resetTimer();
+    $('#word_hint').html(newWord);
 });
 
 $(window).resize(function () {
@@ -115,16 +121,16 @@ $(".team").click(function () {
 });
 
 $('#skip').click(function () {
-    if (timer > 0){
-        //new word
+    if (timer > 0) {
+        $('#word_hint').html(newWord);
         lc.clear();
         resetTimer();
     }
 });
 
 $('#next').click(function () {
-    if (timer > 0){
-        //new word
+    if (timer > 0) {
+        $('#word_hint').html(newWord);
         lc.clear();
         resetTimer();
         givePoint();
