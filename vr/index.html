@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Paint the World</title>
+    <title>Vrtionary | View!</title>
     <style>
         #ui {
             padding-top: 10px;
@@ -33,23 +33,23 @@
     // Initialize Firebase
     // TODO: Replace with your project's customized code snippet
     var config = {
-        apiKey: "AIzaSyBe5R-UlRrhLs1mlgTJ4X2NRXcP0dnv6_g",
-        authDomain: "mspaintvr.firebaseapp.com",
-        databaseURL: "https://mspaintvr.firebaseio.com",
-        storageBucket: "mspaintvr.appspot.com",
-        messagingSenderId: "940993919791",
+    apiKey: "AIzaSyBO4Fh5tOzMwvOEZj15Pi6emrnryaZJvZo",
+    authDomain: "vrtionary.firebaseapp.com",
+    databaseURL: "https://vrtionary.firebaseio.com",
+    projectId: "vrtionary",
+    storageBucket: "vrtionary.appspot.com",
+    messagingSenderId: "267660614869"
     };
     firebase.initializeApp(config);
 </script>
 <script src="js/dist/bspline.js"></script>
-<script src="../js/msPaintvr.js"></script>
-<meta name="description" content="Paint the World!">
+<script src="../js/vrtionary.js"></script>
+<meta name="description" content="Vrtionary | View!">
 
 <script src="js/dist/webvr-polyfill.js"></script>
 <script src="js/dist/aframe-master.js"></script>
 <script src="js/dist/THREE.MeshLine.js"></script>
 <script src="js/dist/webvr-ui.min.js"></script>
-<script src="js/customSky.js"></script>
 <script src="js/meshLineDrawerComp.js"></script>
 </head>
 
@@ -66,21 +66,13 @@
 
 <div id="ui">
     <img width="100" height="100" src="../logo.png"></img>
-    <h1 id="paintingTitle">Paint the World</h1>
-    <h3 id="paintingArtist"> By <a href="https://pascalrascal.github.io">Blaise Marchetti</a> and <a href="https://geczy.tech">Aron Geczy</a></h3>
-    <p>Use The Following Link To Edit the VR Experience in Real-Time</p>
+    <h1 id="paintingTitle">Vrtionary</h1>
+    <p>Try to guess what your pal is painting!</p>
     <a id="editLink"></a>
     <div id="button"></div>
 
     <div id="help">
-        <a href="#" id="fullscreenLads">Try it without a headset</a>
-        <span id="learn-more">
-            or <a href="https://webvr.info" target="_blank">get set up in VR.</a>
-        </span>
-
-    </div>
-    <div id="quickPlug">
-        <a href="http://www.virtuleap.com/apps/details/58" id="">Vote For Us in the Virtuleap WebVR Hackathon!</a>
+        <a href="#" style="font-size: 1.5em"id="fullscreenLads">Try it without a headset</a>
     </div>
 </div>
 <a href="#" id="exit" onclick="enterVR.requestExit()">✕</a>

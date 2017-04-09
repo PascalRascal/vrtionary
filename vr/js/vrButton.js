@@ -18,7 +18,6 @@ scene.addEventListener('loaded', function(){
                 console.log("exit VR");
             })
             .on("error", function(error){
-                document.getElementById("learn-more").style.display = "inline";
                 console.error(error)
             })
             .on("hide", function(){
