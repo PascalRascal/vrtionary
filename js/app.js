@@ -13,12 +13,18 @@ var yo = new VRtionary({});
 //Hide the modal
 $('#gameDetailsModal').hide();
 $('#createGameButton').click(()=>{
+    window.location = 'https://vrtionary.surge.sh/draw'
+})
+$('#joinGameButton').click(() => {
+    $('#gameDetailsModal').modal();
 })
 
 $('#joinInVR').click(()=>{
-    
+    var roomName = $('#roomInput').val();
+    window.location = 'https://vrtionary.surge.sh/vr/?room=' + roomName;
 })
 
 $('#joinAsPainter').click(()=>{
-
+        var roomName = $('#roomInput').val();
+        window.location = 'https://vrtionary.surge.sh/draw/?room=' + roomName;
 })
