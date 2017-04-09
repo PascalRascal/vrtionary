@@ -15,28 +15,7 @@
 	<script src="./js/script.js"></script>
 
 		<script>
-		var lc
-  $(document).ready(function(){
-    var canvasWidth = 720;
-    var canvasHeight = 480;
-    lc = LC.init(document.getElementsByClassName('canvas core')[0], {
-      primaryColor: '#ff0000', 
-      defaultStrokeWidth: 2, 
-      imageSize: {width: canvasWidth, height: canvasHeight}, 
-      backgroundColor: '#fff'});
-      
-      var cel = lc.containerEl;
-	  //Zoom the canvas so the entire canvas is always visible
-      if(canvasHeight > cel.clientHeight || canvasWidth > cel.clientWidth){
-		  var heightRatio = (canvasHeight / cel.clientHeight);
-		  var widthRatio = canvasWidth / cel.clientWidth
-		  if(heightRatio >= widthRatio){
-			lc.setZoom(1 / heightRatio);
-		  } else {
-			lc.setZoom(1 / widthRatio);
-		  }
-      }
-  });
+		
 
 	</script>
 
@@ -45,9 +24,9 @@
 <body>
 <div id='team_wrapper'>
 	<div id='red_team' class='team selected'>8</div>
-	<div id='yellow_team' class='team'>4</div>
+	<div id='blue_team' class='team'>4</div>
 	<div id='green_team' class='team'>5</div>
-	<div id='blue_team' class='team'>11</div>
+	<div id='yellow_team' class='team'>11</div>
 </div>
 <div class="canvas core"></div>
 </body>
