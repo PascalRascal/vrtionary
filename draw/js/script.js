@@ -1,12 +1,9 @@
 var lc,
     canvasWidth = 720,
     canvasHeight = 480,
-<<<<<<< HEAD
-    vrtionary
-=======
+    vrtionary,
     timer = 30, 
     x;
->>>>>>> 9428ec49ef201dedb3653379cededbb979d718b8
 
 //Zoom the canvas so the entire canvas is always visible
 function resizeCanvas() {
