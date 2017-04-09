@@ -71,18 +71,21 @@ AFRAME.registerComponent('testing', {
     }
     this.vrtionary = new VRtionary(options)
     this.vrtionary.init();
-    this.vrtionary.login();
 
 
 
 
   },
 
-  createMeshLine: function (strokeData, color, lineWidth) {
+  createMeshLine: function (strokeData, color, lineWidth, shapeId) {
     var options = {};
     options.color = color;
     options.lineWidth = lineWidth;
+    options.shapeId = shapeId;
     this.uninitiatedDrawingLines.push(new DrawingLine(strokeData, this.el, options));
+  },
+  removeMeshLine: function(shapeId){
+    this.el.removeObject3D(shapeId);
   },
   removeLine: function (id) {
 
@@ -171,6 +174,8 @@ function DrawingLine(drawingData, object3D, options) {
   this.yShift = 150;
   this.sphereDone = false;
 
+  this.shapeId = options.shapeId;
+
 
   this.sphereRadius = 2 + Math.random() * 4;
   this.sphereTimeToComplete = 3 + Math.random() * 7;
@@ -235,7 +240,7 @@ DrawingLine.prototype.initiateLine = function () {
   lineMesh.frustumCulled = false;
   //This is really stupid
   this.id = Math.floor((Math.random() * 100000000000)).toString();
-  this.el.setObject3D(this.id, lineMesh);
+  this.el.setObject3D(this.shapeId, lineMesh);
   this.lineInitiated = true;
   this.linePosition.isMovingToPosition = false;
   this.velocity = new THREE.Vector3(-1, -2, 1);

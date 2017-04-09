@@ -1,12 +1,17 @@
 var lc,
     canvasWidth = 720,
     canvasHeight = 480,
+<<<<<<< HEAD
     vrtionary
+=======
+    timer = 30, 
+    x;
+>>>>>>> 9428ec49ef201dedb3653379cededbb979d718b8
 
 //Zoom the canvas so the entire canvas is always visible
 function resizeCanvas() {
-    var heightRatio = ($(window).height() -20) / canvasHeight,
-        widthRatio = ($(window).width() -20) / canvasWidth;
+    var heightRatio = ($(window).height() - 20) / canvasHeight,
+        widthRatio = ($(window).width() - 20) / canvasWidth;
     
     if (canvasHeight > $(window).height() || canvasWidth > $(window).width()) {
         //window is too small
@@ -25,8 +30,35 @@ function resizeCanvas() {
     }
 }
 
+//(re)start countdown timer
+function resetTimer() {
+    clearInterval(x);
+    timer = 30;
+    $("#count_down").html(timer);
+    x = setInterval(function () {
+        timer = timer - 1;
+        $("#count_down").html(timer);
+        if (timer <= 5) {
+            clearInterval(x);
+            finalCountdown();
+        }
+    }, 1000);
+}
 
+//Up the refresh-rate of the timer for the last few seconds
+function finalCountdown() {
+    timer = 50;
+    $("#count_down").html(timer / 10);
+    x = setInterval(function () {
+        timer = timer - 1;
+        $("#count_down").html((timer / 10).toFixed(1));
+        if (timer <= 0) {
+            clearInterval(x);
+        }
+    }, 100);
+}
 
+//on document.ready
 $(function () {
     //Initialize canvas component
     lc = LC.init(document.getElementsByClassName('canvas core')[0], {
@@ -38,6 +70,7 @@ $(function () {
     vrtionary = new VRtionary({lCanvas: lc});
     
     resizeCanvas();
+    resetTimer();
 });
 
 $(window).resize(function () {
@@ -68,4 +101,17 @@ $(".team").click(function () {
             break;
         }
     }
+});
+
+$('#skip').click(function () {
+    //new word
+    lc.clear();
+    resetTimer();
+});
+
+$('#next').click(function () {
+    //new word
+    lc.clear();
+    resetTimer();
+    //add point
 });

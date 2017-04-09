@@ -11,18 +11,9 @@ function VRtionary(options) {
     this.roomId = generateRoomName();
   }
   this.room = this.db.child('rooms').child(this.roomId);
-  this.room.set({
+  this.room.update({
     teamcount: 4,
   });
-
-  this.shapes = this.room.child('team' + this.team).child('shapes');
-  var _this = this;
-  //WHAT THE FUCK??
-  this.shapes.on('child_added', function(e) {
-      console.log(e);
-    _this.draw2DShape(e);
-  });
-      console.log('lcanvas yo');
 
   if (did) {
     this.drawingId = did;
@@ -42,11 +33,37 @@ function VRtionary(options) {
   }
   if (options.meshLineMaker) {
     this.mlMaker = options.meshLineMaker;
+    var _this = this;
+    this.team1shapes = this.room.child('team' + 1).child('shapes');
+    this.team1shapes.on('child_added', function(e){
+        _this.draw3DShape(e, 1);
+    })
+    this.team2shapes = this.room.child('team' + 2).child('shapes');
+    this.team2shapes.on('child_added', function(e){
+        _this.draw3DShape(e, 2);
+    })
+    this.team3shapes = this.room.child('team' + 3).child('shapes');
+    this.team3shapes.on('child_added', function(e){
+        _this.draw3DShape(e, 3);
+    })
+    this.team4shapes = this.room.child('team' + 4).child('shapes');
+    this.team1shapes.on('child_added', function(e){
+        _this.draw3DShape(e, 4);
+    })
   }
   if (options.lCanvas) {
     this.lCanvas = options.lCanvas;
     console.log('lcanvas yo');
     var _this = this;
+      this.shapes = this.room.child('team' + this.team).child('shapes');
+  var _this = this;
+  //WHAT THE FUCK??
+  this.shapes.on('child_added', function(e) {
+      console.log(e);
+    _this.draw2DShape(e);
+  });
+      console.log('lcanvas yo');
+
     this.lCanvas.on('shapeSave', function(e) {
       var shape = e.shape;
       console.log(shape);
@@ -124,7 +141,7 @@ VRtionary.prototype.init = function() {
 
 VRtionary.prototype.createRoom = function(roomname, teamcount) {
   this.room = this.db.child('rooms').child(roomname);
-  this.room.set({
+  this.room.update({
     teamcount: teamcount,
   });
 };
@@ -186,15 +203,16 @@ VRtionary.prototype.draw2DShape = function(s) {
 /**
  * VR Environment Functions
  * */
-VRtionary.prototype.draw3DShape = function(s) {
+VRtionary.prototype.draw3DShape = function(s, teamNumber) {
   var shape = s.val();
+  var shapeId = shape.shapeId;
   /**
      * Todo: Make height+width not bound in stone
      */
-  var maxHeight = 200;
-  var maxWidth = 800;
-  var points = generate3DPoints(shape.linePoints2D, maxWidth, maxHeight);
-  this.mlMaker.createMeshLine(points, shape.color, shape.strokeWidth);
+  var maxHeight = 480;
+  var maxWidth = 720;
+  var points = generate3DPoints(shape.linePoints2D, maxWidth, maxHeight, teamNumber);
+  this.mlMaker.createMeshLine(points, shape.color, shape.strokeWidth, shapeId);
 };
 VRtionary.prototype.undraw3DShape = function(s) {
   var shape = s.val();
@@ -235,10 +253,10 @@ var generate2DPoints = function(shape) {
 };
 
 var lineCount = 0;
-var generate3DPoints = function(points, maxWidth, maxHeight) {
+var generate3DPoints = function(points, maxWidth, maxHeight, tn) {
   //TODO: Implement Proper depth for lines on top of each other
   if (points.length) {
-    var width = maxWidth;
+    var width = 4*maxWidth;
     var height = maxHeight;
     var radius = maxWidth / (2 * Math.PI);
     var points3D = [];
@@ -247,15 +265,18 @@ var generate3DPoints = function(points, maxWidth, maxHeight) {
     for (var i = 0; i <= 1; i += 1 / (points.length * 4)) {
       bsplinePoints.push(spline.calcAt(i));
     }
-
+    console.log(tn);
     for (var i = 0; i < bsplinePoints.length; i++) {
       points3D[i] = [];
-      points3D[i][0] = Math.cos(2 * Math.PI * bsplinePoints[i][0] / width) *
+      points3D[i][0] = Math.cos(2 * Math.PI * (((tn-1) * maxWidth) + bsplinePoints[i][0]) / width) *
         radius;
       points3D[i][1] = maxHeight / 2 - bsplinePoints[i][1];
-      points3D[i][2] = Math.sin(2 * Math.PI * bsplinePoints[i][0] / width) *
+      points3D[i][2] = Math.sin(2 * Math.PI * (((tn-1) * maxWidth) + bsplinePoints[i][0]) / width) *
         radius;
+      console.log(maxHeight / 2 - bsplinePoints[i][1]);
     }
+    console.log(((tn - 1) * maxWidth));
+    
 
     return points3D;
   } else {
