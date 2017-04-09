@@ -9,12 +9,5 @@ console.log('yaaaaaaaaa');
       imageSize: {width: canvasWidth, height: canvasHeight}, 
       backgroundColor: '#fff'});
       
-      var cel = lc.containerEl;
-      if(cel.clientHeight > canvasHeight || cel.clientWidth > canvasWidth){
-        console.log("WOOOO");
-        console.log(lc.zoom);
-        lc.setZoom((canvasHeight/canvasWidth) / (cel.clientHeight/cel.canvasWidth));
-                console.log(lc.zoom);
 
-      }
   });
