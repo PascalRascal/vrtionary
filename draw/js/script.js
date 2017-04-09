@@ -91,7 +91,7 @@ $(function () {
         backgroundColor: '#fff'
     });
     vrtionary = new VRtionary({lCanvas: lc});
-    
+    vrtionary.setClockElement();
     resizeCanvas();
     resetTimer();
     $('#word_hint').html(newWord);

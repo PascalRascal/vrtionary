@@ -15,4 +15,10 @@ $('#gameDetailsModal').hide();
 $('#createGameButton').click(()=>{
 })
 
-$('#createGameButton')
+$('#joinInVR').click(()=>{
+    
+})
+
+$('#joinAsPainter').click(()=>{
+
+})
