@@ -27,6 +27,11 @@ function resizeCanvas() {
     }
 }
 
+//adds one to selected team's score
+function givePoint() {
+    $('.team.selected').html(parseInt($('.team.selected').html()) + 1);
+}
+
 //(re)start countdown timer
 function resetTimer() {
     clearInterval(x);
@@ -101,14 +106,18 @@ $(".team").click(function () {
 });
 
 $('#skip').click(function () {
-    //new word
-    lc.clear();
-    resetTimer();
+    if (timer > 0){
+        //new word
+        lc.clear();
+        resetTimer();
+    }
 });
 
 $('#next').click(function () {
-    //new word
-    lc.clear();
-    resetTimer();
-    //add point
+    if (timer > 0){
+        //new word
+        lc.clear();
+        resetTimer();
+        givePoint();
+    }
 });
