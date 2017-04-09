@@ -24,8 +24,6 @@ function resizeCanvas() {
     }
 }
 
-
-
 $(function () {
     //Initialize canvas component
     lc = LC.init(document.getElementsByClassName('canvas core')[0], {
@@ -47,19 +45,6 @@ $(".team").click(function () {
         $(".team.selected").removeClass("selected");
         $(this).addClass("selected");
         lc.clear();
-        switch ($(this).attr("class").split(/\s+/)[1]) {
-        case "red":
-            lc.setColor("primary", "#ff0000");
-            break;
-        case "blue":
-            lc.setColor("primary", "#0f0fff");
-            break;
-        case "green":
-            lc.setColor("primary", "#32CD32");
-            break;
-        case "yellow":
-            lc.setColor("primary", "#fff000");
-            break;
-        }
+        lc.setColor("primary", $(this).css("background-color"));
     }
 });
