@@ -13,7 +13,6 @@ var yo = new VRtionary({});
 //Hide the modal
 $('#gameDetailsModal').hide();
 $('#createGameButton').click(()=>{
-    $('#gameDetailsModal').modal();
 })
 
 $('#joinInVR').click(()=>{
@@ -23,3 +22,4 @@ $('#joinInVR').click(()=>{
 $('#joinAsPainter').click(()=>{
 
 })
+$('#createGameButton')

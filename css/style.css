@@ -39,3 +39,6 @@ input{
     margin-top: 1em;
     font-family: sans-serif;
 }
+a{
+    text-decoration: none;
+}
