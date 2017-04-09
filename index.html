@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        Vrtionary
+    </title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://www.gstatic.com/firebasejs/3.6.2/firebase.js"></script>
+    <script src="./js/vrtionary.js"> </script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyBO4Fh5tOzMwvOEZj15Pi6emrnryaZJvZo",
+            authDomain: "vrtionary.firebaseapp.com",
+            databaseURL: "https://vrtionary.firebaseio.com",
+            projectId: "vrtionary",
+            storageBucket: "vrtionary.appspot.com",
+            messagingSenderId: "267660614869"
+        };
+        firebase.initializeApp(config);
+
+    </script>
+        <script src="./js/jquery-3.1.1.js"> </script>
+        <script src="./js/jquery.modal.min.js" type="text/javascript" charset="utf-8"></script>
+        <link rel="stylesheet" href="./css/jquery.modal.css" type="text/css" media="screen" />
+
+</head>
+
+<body>
+    <div>
+        <button id="createGameButton"> Create a Game </button>
+    </div>
+    <div>
+        <button id="joinGameButton"> Join a Game </button>
+    </div>
+
+    <div id="gameDetailsModal" class="modal">
+        <p>Hello World! </p>
+    </div>
+    <script src="./js/app.js"></script>
+
+</body>
+
+
+</html>

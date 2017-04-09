@@ -1,6 +1,7 @@
 var lc,
     canvasWidth = 720,
-    canvasHeight = 480;
+    canvasHeight = 480,
+    vrtionary
 
 //Zoom the canvas so the entire canvas is always visible
 function resizeCanvas() {
@@ -34,6 +35,7 @@ $(function () {
         imageSize: {width: canvasWidth, height: canvasHeight},
         backgroundColor: '#fff'
     });
+    vrtionary = new VRtionary({lCanvas: lc});
     
     resizeCanvas();
 });
@@ -49,15 +51,19 @@ $(".team").click(function () {
         lc.clear();
         switch ($(this).attr("class").split(/\s+/)[1]) {
         case "red":
+            vrtionary.setTeam(1);
             lc.setColor("primary", "#ff0000");
             break;
         case "blue":
+            vrtionary.setTeam(2);
             lc.setColor("primary", "#0f0fff");
             break;
         case "green":
+            vrtionary.setTeam(3);
             lc.setColor("primary", "#32CD32");
             break;
         case "yellow":
+            vrtionary.setTeam(4);
             lc.setColor("primary", "#fff000");
             break;
         }
