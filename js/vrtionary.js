@@ -319,7 +319,7 @@ var generate3DPoints = function(points, maxWidth, maxHeight, tn) {
       points3D[i] = [];
       points3D[i][0] = Math.cos(2 * Math.PI * (((tn-1) * maxWidth) + bsplinePoints[i][0]) / width) *
         radius;
-      points3D[i][1] = maxHeight / 2 - bsplinePoints[i][1];
+      points3D[i][1] = (maxHeight / 2 - bsplinePoints[i][1]) / 2;
       points3D[i][2] = Math.sin(2 * Math.PI * (((tn-1) * maxWidth) + bsplinePoints[i][0]) / width) *
         radius;
     }
