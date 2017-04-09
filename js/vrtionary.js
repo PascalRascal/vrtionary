@@ -124,13 +124,41 @@ VRtionary.prototype.setTeam = function(teamNumber) {
     this.shapes.on('child_added',function(e) {
       _this.draw2DShape(e);
     });
-  }``
+  }
   
 
   console.log(this.team);
 };
 
+VRtionary.prototype.setTeamScore = function(newScore){
+    this.room.child('team' + this.team).update({
+        score: newScore
+    })
+}
 
+VRtionary.prototype.ultimateClear = function(){
+    this.shapes.set(null);
+    this.lCanvas.clear();
+}
+
+VRtionary.prototype.setTeamTime = function(newTime){
+    this.room.child('team' + this.team).update({
+        time: newTime
+    })
+}
+
+
+VRtionary.setTeamScore = function(newScore){
+    this.room.child('team' + this.team).update({
+        score: newScore
+    })
+}
+
+VRtionary.setTeamWord = function(newWord){
+    this.room.child('team' + this.team).update({
+        teamWord: newWord
+    })
+}
 VRtionary.prototype.init = function() {
   //Initiate Authentication and Database
   this.auth = firebase.auth();

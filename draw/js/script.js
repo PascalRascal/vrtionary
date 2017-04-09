@@ -39,6 +39,7 @@ function resizeCanvas() {
 //adds one to selected team's score
 function givePoint() {
     $('.team.selected').html(parseInt($('.team.selected').html(), 10) + 1);
+    vrtionary.setTeamScore(parseInt($('.team.selected').html(), 10));
 }
 
 //Returns a random word
@@ -48,11 +49,13 @@ function newWord() {
 
 //(re)start countdown timer
 function resetTimer() {
+    vrtionary.ultimateClear();
     clearInterval(x);
     timer = 30;
     $("#count_down").html(timer);
     x = setInterval(function () {
         timer = timer - 1;
+        vrtionary.setTeamTime(timer);
         $("#count_down").html(timer);
         if (timer <= 5) {
             clearInterval(x);
@@ -68,6 +71,7 @@ function finalCountdown() {
     x = setInterval(function () {
         timer = timer - 1;
         $("#count_down").html((timer / 10).toFixed(1));
+        vrtionary.setTeamTime((timer/10).toFixed(1));
         if (timer <= 0) {
             clearInterval(x);
         }
