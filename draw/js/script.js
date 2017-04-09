@@ -27,6 +27,7 @@ $.modal.defaults = {
   fadeDuration: null,     // Number of milliseconds the fade transition takes (null means no transition)
   fadeDelay: 1.0          // Point during the overlay's fade-in that the modal begins to fade in (.5 = 50%, 1.5 = 150%, etc.)
 };
+
 //Zoom the canvas so the entire canvas is always visible
 function resizeCanvas() {
     var heightRatio = ($(window).height() - 20) / canvasHeight,
@@ -105,6 +106,7 @@ $(function () {
     });
     vrtionary = new VRtionary({lCanvas: lc});
     vrtionary.setClockElement();
+    $("#room_id").html("Room ID: " + vrtionary.roomId);
     resizeCanvas();
     $('#overlay').hide();
     $('#overlay').modal();
