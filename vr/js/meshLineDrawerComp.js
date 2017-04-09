@@ -29,16 +29,13 @@ AFRAME.registerComponent('testing', {
   init: function () {
     var aSky = document.querySelector('a-sky');
     var color = findGetParameter('clr');
-    console.log(color);
     if (color) {
-      console.log('Changing the color!');
       aSky.setAttribute('color', '#' + color);
     }
     var imgSrc = findGetParameter('src');
     if (imgSrc) {
       aSky.setAttribute('src', imgSrc);
     }
-    console.log("Initiated meshline!");
     this.resolution = new THREE.Vector2(window.innerWidth, window.innerHeight);
     this.linePosition = new THREE.Vector3(0, 0, 0);
     this.lineInitiated = false;
@@ -226,7 +223,6 @@ DrawingLine.prototype.initiateLine = function () {
     //far: 1000
   });
   if(this.options.teamNumber == 4){
-    console.log("getting closer /...");
   }
   var geometry = new THREE.Geometry();
 
@@ -255,7 +251,7 @@ DrawingLine.prototype.initiateLine = function () {
 }
 
 DrawingLine.prototype.wander = function () {
-  var timeToComplete = 1000 + Math.floor(Math.random() * 3000);
+  var timeToComplete = 1000;
   var angle = Math.random() * Math.PI * 2;
   var radius = Math.random() * 10;
   var randomX = Math.cos(angle) * Math.sqrt(100 - Math.pow(radius, 2));
